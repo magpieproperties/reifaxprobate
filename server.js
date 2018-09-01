@@ -258,7 +258,7 @@ const sourceData = formatSource(d);
   
    try
    {
-	await page.waitForSelector('#result_orderby_asc');
+	    await page.waitForSelector('#result_orderby_asc');
    }
    catch(error2)
    {
@@ -760,23 +760,23 @@ let boxResult10  = await page.evaluate((sel) => {
 	 
 	 var podioJson = {"fields":{"title":ownerName_result,"lead-source":sourceData,"lead-intake-date":intakeDate,"motivation":8,"status-of-lead":14,"next-action":15,"property-address":address_result +" ,"+ cityValue_result+" ,"+zip_result ,"owners-address":ownerAddress_result +" ,"+ ownerCity_result+" ,"+ownerZip_result,"estimated-value":{"value":buildValue,"currency":"USD"},"beds-2":bed,"baths-2":baths,"square-feet":lArea,"year-built-2":built_result,"property-taxes-assement":taxValue,"last-sale-price":soldPrice}};
 
-	 //console.log(podioJson);
+	   //console.log(podioJson);
      //console.log(intakeDate);
 
      
     
     
-    //await request.on('done', function (rowCount, more, rows) {
-     //  dataInserted = rowCount;
+    await request.on('done', function (rowCount, more, rows) {
+      dataInserted = rowCount;
 
 
-     //});
+     });
     
     
     //console.log(dataInserted);
     if(dataInserted > 0)
     {
-      insertPODIOItem(podioJson);
+       insertPODIOItem(podioJson);
     }
 	 
 }
@@ -795,7 +795,7 @@ catch(err)
 }
 
 //await page.waitForNavigation({waitUntil:'networkidle0'});
-await page.focus(COUNTY_DROPDOWN, {delay:2000});
+await page.click("#ext-gen201", {delay:2000});
 
 await page.keyboard.press('ArrowUp',{delay:250});
 await page.keyboard.press('ArrowUp',{delay:250});
@@ -905,6 +905,8 @@ await page.keyboard.down('Enter');
 	   //sendZeroResultsEmail();
 	   //await browser.close();
    }
+
+    await page.waitFor(4000);
 	   
   
     pageSelector = await page.evaluate(() => {
@@ -953,7 +955,7 @@ await page.keyboard.down('Enter');
    }
  
  
-    boxResult1  = await page.evaluate((sel) => {
+    let boxResult1  = await page.evaluate((sel) => {
           let elements = Array.from(document.querySelectorAll(sel));
           return elements.length;
 		}, '#box_result_0');
@@ -961,35 +963,35 @@ await page.keyboard.down('Enter');
 		
 	//console.log(boxResult1);
   
-  boxResult2  = await page.evaluate((sel) => {
+  let boxResult2  = await page.evaluate((sel) => {
             let elements = Array.from(document.querySelectorAll(sel));
               return elements.length;
 		}, '#box_result_1');
 		
 	//console.log(boxResult2);
 	
-  boxResult3  = await page.evaluate((sel) => {
+   let boxResult3  = await page.evaluate((sel) => {
             let elements = Array.from(document.querySelectorAll(sel));
               return elements.length;
 		}, '#box_result_2');
 		
 	//console.log(boxResult3);
 	
-  boxResult4  = await page.evaluate((sel) => {
+    let boxResult4  = await page.evaluate((sel) => {
            let elements = Array.from(document.querySelectorAll(sel));
              return elements.length;
 		}, '#box_result_3');
 		
 	//console.log(boxResult4);
 	
-  boxResult5  = await page.evaluate((sel) => {
+  let boxResult5  = await page.evaluate((sel) => {
          let elements = Array.from(document.querySelectorAll(sel));
            return elements.length;
 		}, '#box_result_4');
 		
 	//console.log(boxResult5);
 	
-  boxResult6  = await page.evaluate((sel) => {
+  let boxResult6  = await page.evaluate((sel) => {
             let elements = Array.from(document.querySelectorAll(sel));
               return elements.length;
 		}, '#box_result_5');
@@ -1386,7 +1388,7 @@ await page.keyboard.down('Enter');
         }
         //console.log(rowCount + ' row(s) returned');
         dataInserted = rowCount;
-       }
+      }
      
 
     );
@@ -1399,17 +1401,17 @@ await page.keyboard.down('Enter');
 	 
 	  podioJson = {"fields":{"title":ownerName_result,"lead-source":sourceData,"lead-intake-date":intakeDate,"motivation":8,"status-of-lead":14,"next-action":15,"property-address":address_result +" ,"+ cityValue_result+" ,"+zip_result ,"owners-address":ownerAddress_result +" ,"+ ownerCity_result+" ,"+ownerZip_result,"estimated-value":{"value":buildValue,"currency":"USD"},"beds-2":bed,"baths-2":baths,"square-feet":lArea,"year-built-2":built_result,"property-taxes-assement":taxValue,"last-sale-price":soldPrice}};
 
-	 //console.log(podioJson);
+	   //console.log(podioJson);
      //console.log(intakeDate);
 
      
     
     
-    //await request.on('done', function (rowCount, more, rows) {
-     //  dataInserted = rowCount;
+    await request.on('done', function (rowCount, more, rows) {
+       dataInserted = rowCount;
 
 
-     //});
+     });
     
     
     //console.log(dataInserted);
@@ -1434,7 +1436,7 @@ catch(err)
 }
 
 //await page.waitForNavigation({waitUntil:'networkidle0'});
-await page.focus(COUNTY_DROPDOWN, {delay:2000});
+await page.click("#ext-gen201", {delay:2000});
 
 await page.keyboard.press('ArrowDown',{delay:250});
 await page.keyboard.press('ArrowDown',{delay:250});
@@ -1553,7 +1555,8 @@ await page.keyboard.down('Enter');
 	   //sendZeroResultsEmail();
 	   //await browser.close();
    }
-	   
+
+   await page.waitFor(4000);
   
     pageSelector = await page.evaluate(() => {
     let elements = Array.from( document.getElementsByClassName('x-panel-body x-panel-body-noheader x-panel-body-noborder'));
@@ -2040,10 +2043,10 @@ await page.keyboard.down('Enter');
     );
     await connection.execSql(request);
 
-     if(dataInserted > 0)
-     {
-        viewData.push(json);
-     }
+    if(dataInserted > 0)
+    {
+       viewData.push(json);
+    }
 	 
 	  podioJson = {"fields":{"title":ownerName_result,"lead-source":sourceData,"lead-intake-date":intakeDate,"motivation":8,"status-of-lead":14,"next-action":15,"property-address":address_result +" ,"+ cityValue_result+" ,"+zip_result ,"owners-address":ownerAddress_result +" ,"+ ownerCity_result+" ,"+ownerZip_result,"estimated-value":{"value":buildValue,"currency":"USD"},"beds-2":bed,"baths-2":baths,"square-feet":lArea,"year-built-2":built_result,"property-taxes-assement":taxValue,"last-sale-price":soldPrice}};
 
@@ -2053,11 +2056,11 @@ await page.keyboard.down('Enter');
      
     
     
-    //await request.on('done', function (rowCount, more, rows) {
-     //  dataInserted = rowCount;
+    await request.on('done', function (rowCount, more, rows) {
+       dataInserted = rowCount;
 
 
-     //});
+     });
     
     
     //console.log(dataInserted);
@@ -2082,7 +2085,7 @@ catch(err)
 }
 
 //await page.waitForNavigation({waitUntil:'networkidle0'});
-await page.focus(COUNTY_DROPDOWN, {delay:2000});
+await page.click("#ext-gen201", {delay:2000});
 
 await page.keyboard.press('ArrowDown',{delay:250});
 await page.keyboard.press('ArrowDown',{delay:250});
@@ -2188,7 +2191,7 @@ await page.keyboard.down('Enter');
 	  await page.click('#ext-gen130'),{delay:5000};
   }
   
-  
+   await page.waitFor(4000);
   
    try
    {
@@ -2672,16 +2675,16 @@ await page.keyboard.down('Enter');
    data = [ownerName_result,address_result +" ,"+ cityValue_result + " ," + zip_result]
    dataInserted;
      
-     request = new Request("INSERT INTO ProbateProperties with (ROWLOCK) ([Ownername], [Address]) SELECT '"+ data[0].toString()+ "', '"+ data[1].toString()+ "' WHERE NOT EXISTS (SELECT * FROM dbo.ProbateProperties WHERE Address = '"+data[1].toString() +"');",
-     function(err,rowCount)
-     {
+    request = new Request("INSERT INTO ProbateProperties with (ROWLOCK) ([Ownername], [Address]) SELECT '"+ data[0].toString()+ "', '"+ data[1].toString()+ "' WHERE NOT EXISTS (SELECT * FROM dbo.ProbateProperties WHERE Address = '"+data[1].toString() +"');",
+    function(err,rowCount)
+    {
        if(err)
        {
          console.log(err);
         }
         //console.log(rowCount + ' row(s) returned');
         dataInserted = rowCount;
-       }
+    }
      
 
     );
@@ -2700,11 +2703,11 @@ await page.keyboard.down('Enter');
      
     
     
-    //await request.on('done', function (rowCount, more, rows) {
-     //  dataInserted = rowCount;
+    await request.on('done', function (rowCount, more, rows) {
+       dataInserted = rowCount;
 
 
-     //});
+     });
     
     
     //console.log(dataInserted);
@@ -2729,7 +2732,7 @@ catch(err)
 }
 
 //await page.waitForNavigation({waitUntil:'networkidle0'});
-await page.focus(COUNTY_DROPDOWN, {delay:2000});
+await page.click("#ext-gen201", {delay:2000});
 
 await page.keyboard.press('ArrowDown',{delay:250});
 await page.keyboard.press('ArrowDown',{delay:250});
@@ -2847,7 +2850,8 @@ await page.keyboard.down('Enter');
 	   //sendZeroResultsEmail();
 	   //await browser.close();
    }
-	   
+     
+   await page.waitFor(4000);
   
     pageSelector = await page.evaluate(() => {
     let elements = Array.from( document.getElementsByClassName('x-panel-body x-panel-body-noheader x-panel-body-noborder'));
@@ -3324,8 +3328,8 @@ await page.keyboard.down('Enter');
      {
        if(err)
        {
-         console.log(err);
-        }
+        console.log(err);
+       }
         //console.log(rowCount + ' row(s) returned');
         dataInserted = rowCount;
        }
@@ -3347,11 +3351,11 @@ await page.keyboard.down('Enter');
      
     
     
-    //await request.on('done', function (rowCount, more, rows) {
-     //  dataInserted = rowCount;
+    await request.on('done', function (rowCount, more, rows) {
+       dataInserted = rowCount;
 
 
-     //});
+     });
     
     
     //console.log(dataInserted);
